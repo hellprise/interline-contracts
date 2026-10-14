@@ -80,7 +80,7 @@ Continuous integration in GitHub Actions runs as a single job (`CI`) executing `
 3. **Precompiling packages to `dist/` via `tsc -b` / Bundlers:**
    - _Rejected:_ Requires build watchers and slows down local test-driven development (TDD). Consuming `src` directly leverages Node 26's native TypeScript support with zero build latency.
 4. **Standalone Prettier:**
-   - _Rejected:_ Flat Config ESLint provides adequate formatting checks for early packages without maintaining additional configuration files or CI steps.
+   - _Rejected:_ Flat Config ESLint does not provide adequate formatting checks.
 5. **Multi-Job CI Pipeline:**
    - _Rejected:_ Running lint, typecheck, and test in separate jobs would require 3 virtual machines and 3 separate `pnpm install` runs, unnecessarily increasing CI run time and consumption.
 
@@ -100,4 +100,4 @@ Continuous integration in GitHub Actions runs as a single job (`CI`) executing `
 - Internal packages cannot be published directly to external npm registries without introducing a distribution build pipeline.
 - Requires all workspace consumers and runners to support native TypeScript execution (Node 26+).
 - Strict adherence to `erasableSyntaxOnly` prevents using TypeScript-only features like runtime `enum`s.
-- Node.js native type stripping explicitly refuses to execute `.ts` files inside `node_modules` directories. Locally it works perfect, because locally workspace symlinks and Vitest handle `.ts` source imports. But deploying packages into isolated production environments or Docker containers will fail at runtime. So, that is why compilation step to `dist/` will be added when it is needed.
+- Node.js native type stripping explicitly refuses to execute `.ts` files inside `node_modules` directories. Locally it works perfectly, because locally workspace symlinks and Vitest handle `.ts` source imports. But deploying packages into isolated production environments or Docker containers can fail at runtime. That is why a compilation step to `dist/` will be added when it is needed.
