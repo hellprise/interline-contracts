@@ -80,7 +80,7 @@ Continuous integration in GitHub Actions runs as a single job (`CI`) executing `
 3. **Precompiling packages to `dist/` via `tsc -b` / Bundlers:**
    - _Rejected:_ Requires build watchers and slows down local test-driven development (TDD). Consuming `src` directly leverages Node 26's native TypeScript support with zero build latency.
 4. **Standalone Prettier:**
-   - _Rejected:_ Flat Config ESLint does not provide adequate formatting checks.
+   - _Rejected:_ Deferred until frontend work; formatting is not checked for now.
 5. **Multi-Job CI Pipeline:**
    - _Rejected:_ Running lint, typecheck, and test in separate jobs would require 3 virtual machines and 3 separate `pnpm install` runs, unnecessarily increasing CI run time and consumption.
 
