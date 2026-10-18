@@ -5,14 +5,16 @@ The command for regeneration is `go run ./cmd/seedgen -seed 42 -start 2026-11-02
 
 ## Files and Columns
 
-| File           | Columns                                                                                         |
-| :------------- | :---------------------------------------------------------------------------------------------- |
-| `airlines.csv` | `code, name`                                                                                    |
-| `airports.csv` | `iata, name, country`                                                                           |
-| `flights.csv`  | `flight_key, airline_code, flight_number, dep_airport, arr_airport, dep_time_utc, arr_time_utc` |
+| File           | Columns                                                                                   |
+| :------------- | :---------------------------------------------------------------------------------------- |
+| `airlines.csv` | `code,name`                                                                               |
+| `airports.csv` | `iata,name,country`                                                                       |
+| `flights.csv`  | `flight_key,airline_code,flight_number,dep_airport,arr_airport,dep_time_utc,arr_time_utc` |
 
 ## Data rules
 
+- **CSV format:** UTF-8 encoding, comma-separated (`,`), quoting per RFC 4180 (fields containing commas, such as `"Lisbon, Humberto Delgado"`, are enclosed in double quotes).
+- **Row semantics:** one row represents one flight departure on a single UTC service date; a cancelled flight is represented by an absent row; CSV files do not contain seat capacity or inventory.
 - **Timestamps:** UTC in `RFC 3339` format ending with `Z`.
 - **Flight key (`flight_key`):** `AIRLINE-NUMBER-YYYY-MM-DD`, where the date is the UTC departure date and `flight_number` is in `1..9999`.
 - **Duration & sorting:** flight block time is `45m..5h`; `flights.csv` is sorted by `dep_time_utc`, then by `flight_key`.
