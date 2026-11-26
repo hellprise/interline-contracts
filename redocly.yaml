@@ -1,0 +1,5 @@
+extends:
+  - recommended
+rules:
+  security-defined: off # service JWT will be added in P2.7
+  no-empty-servers: off # engine URL is configured per environment
